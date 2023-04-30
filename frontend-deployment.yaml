@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-frontend
+  template:
+    metadata:
+      labels:
+        app: python-frontend
+    spec:
+      containers:
+      - name: python-frontend
+        image: <frontend_docker_image>
+        env:
+        - name: BACKEND_HOST
+          value: "localhost"
+        - name: BACKEND_PORT
+          value: "8080"
+        ports:
+        - containerPort: 80
